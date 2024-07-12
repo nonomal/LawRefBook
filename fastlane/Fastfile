@@ -1,0 +1,33 @@
+default_platform(:ios)
+
+platform :ios do
+
+end
+
+
+lane :tests do
+  run_tests(
+      devices: ["iPhone 13"],
+      scheme: "law.handbook"
+    )
+end
+
+lane :beta do
+  setup_ci if ENV['CI']
+
+  match(git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"])
+
+  build_ios_app(
+      scheme: "law.handbook"
+    )
+
+  app_store_connect_api_key(
+      key_id: "2W5Y3ZBD4J",
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_KEY_CONTENT"],
+    )
+
+  upload_to_testflight(
+    skip_waiting_for_build_processing: false,
+  )
+end

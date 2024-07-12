@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.swift'
+  pull_request:
+    types: [opened, reopened]
+
+
+jobs:
+  build:
+    name: Tests
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Install fastlane
+        run: |
+          brew install fastlane
+
+      - name: Run Tests
+        run: |
+          export LC_ALL=en_US.UTF-8
+          export LANG=en_US.UTF-8
+          fastlane tests

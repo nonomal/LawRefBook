@@ -108,6 +108,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+fastlane/key.json
 
 # Code Injection
 # After new code Injection tools there's a generated folder /iOSInjectionProject
@@ -132,3 +133,6 @@ iOSInjectionProject/
 
 **/__cache__
 scripts/req.py
+
+Laws/
+**/.env
